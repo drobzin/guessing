@@ -2,6 +2,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Guessing {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final Random random = new Random();
 
     public static void main(String[] args) {
         System.out.println("Привет!");
@@ -12,7 +14,6 @@ public class Guessing {
 
     private static boolean playGame() {
         System.out.println("Будешь угадывать? (да/нет)");
-        Scanner scanner = new Scanner(System.in);
         String answer = scanner.nextLine();
         switch (answer) {
             case "да":
@@ -29,11 +30,13 @@ public class Guessing {
     }
 
     private static void guessNumber() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("угадай число от 1 до 10");
-        int randomNumber = new Random().nextInt(1, 11);
-        int userNumber = scanner.nextInt();
+        int randomNumber = random.nextInt(1,11);
+        int userNumber = -1;
         while (userNumber != randomNumber) {
+            userNumber = scanner.nextInt();
+            scanner.nextLine();
+
             int difference = Math.abs(userNumber - randomNumber);
             if (userNumber < 1 || userNumber > 10) {
                 System.out.println("Читать не умеешь?");
@@ -47,7 +50,7 @@ public class Guessing {
             else if (difference >= 1) {
                 System.out.println("Жгётся!");
             }
-            userNumber = scanner.nextInt();
+
         }
         System.out.println("(⌒‿⌒)");
     }
